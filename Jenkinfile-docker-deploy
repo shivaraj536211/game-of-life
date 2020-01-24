@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     tools { 
-        maven 'Maven' 
+        maven 'maven' 
       
     }
 stages { 
@@ -41,7 +41,7 @@ stages {
       
       }
  }
- stage('Sonarqube') {
+ stage('sonarqube') {
     environment {
         scannerHome = tool 'sonarqube'
     }
