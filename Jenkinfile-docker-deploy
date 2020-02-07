@@ -1,8 +1,12 @@
-pipeline {
+pipeline 
+{
+    environment {
+    registry = "ravigopireddy299/gameoflife-image"
+    registryCredential = 'dockerhub'
+     }
     agent any 
     tools { 
         maven 'maven' 
-      
     }
 stages { 
      
@@ -41,7 +45,7 @@ stages {
       
       }
  }
- stage('sonarqube') {
+ stage('Sonarqube') {
     environment {
         scannerHome = tool 'sonarqube'
     }
@@ -57,6 +61,12 @@ stages {
      stage('Artifact upload') {
       steps {
      nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'gameoflife-web/target/gameoflife.war']], mavenCoordinate: [artifactId: 'gameoflife1', groupId: 'com.wakaleo.gameoflife', packaging: 'war', version: '$BUILD_NUMBER']]]
+      }
+ }
+ stage('Deploy War') {
+      steps {
+  //      sh label: '', script: 'ansible-playbook deploy.yml'
+          deploy adapters: [tomcat8(credentialsId: '71ef3adb-3efc-4c51-8cc3-66ecca6e702a', path: '', url: 'http://3.6.206.171:8080/manager/html')], contextPath: 'gameoflife', war: '**/*.war'
       }
  }
     stage('Build and Push Docker Image') {
