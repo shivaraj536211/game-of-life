@@ -63,12 +63,12 @@ stages {
      nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'gameoflife-web/target/gameoflife.war']], mavenCoordinate: [artifactId: 'gameoflife1', groupId: 'com.wakaleo.gameoflife', packaging: 'war', version: '$BUILD_NUMBER']]]
       }
  }
- // stage('Deploy War') {
-   //   steps {
-  //      sh label: '', script: 'ansible-playbook deploy.yml'
-     //     deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: '', url: 'http://3.17.140.71:8080/manager/html')], contextPath: '/var/lib/jenkins/workspace/A--CI-CD/gameoflife-web/target', war: 'WAR'
-     //  }
- //  }
+  stage('Deploy War') {
+      steps {
+        sh label: '', script: 'ansible-playbook deploy.yml'
+          deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: '', url: 'http://3.17.140.71:8080/manager/html')], contextPath: '/var/lib/jenkins/workspace/A--CI-CD/gameoflife-web/target', war: 'WAR'
+       }
+    }
     stage('Build and Push Docker Image') {
       steps {
         sh label: '', script: '''sudo docker build -t gameoflife-image:$BUILD_NUMBER .
