@@ -77,7 +77,7 @@ stages {
            {
            steps{
            withCredentials([string(credentialsId: 'dowithCredentials([string(credentialsId: 'nani', variable: 'nani')]) { 
-            {
+            
            sh "docker login -u shivaraj536211 -p ${nani}"
            sh "docker push gameoflife:${BUILD_NUMBER}"
             }
