@@ -8,9 +8,9 @@ pipeline
     tools { 
         maven 'maven' 
     }
-stages{ 
+    stages{ 
      
- stage('Preparation') { 
+     stage('Preparation') { 
      steps {
 // for display purposes
 
@@ -26,7 +26,7 @@ stages{
      }
    }
 
-   stage('Build') {
+     stage('Build') {
        steps {
        // Run the maven build
 
@@ -37,18 +37,18 @@ stages{
       //   bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
        }
 //}
-   }
+    }
  
-  stage('Unit Test Results') {
+     stage('Unit Test Results') {
       steps {
       junit '**/target/surefire-reports/TEST-*.xml'
       
       }
- }
- stage('sonarqube') {
-    environment {
-        scannerHome = tool 'sonarqube'
-    }
+   }
+    stage('sonarqube') {
+      environment {
+         scannerHome = tool 'sonarqube'
+     }
     steps {
         withSonarQubeEnv('sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner"
@@ -61,7 +61,7 @@ stages{
      nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/JOB-1/gameoflife-web/target/gameoflife.war']], mavenCoordinate: [artifactId: 'gameoflife1', groupId: 'com.wakaleo.gameoflife', packaging: 'war', version: '$BUILD_NUMBER']]]
       }
    }
-  stage('Deploy War') {
+    stage('Deploy War') {
       steps {
         //   sh label: '', script: 'ansible-playbook deploy.yml'
              deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: '', url: 'http://3.6.252.169:8080')], contextPath: 'jujubi', war: '**/*.war'
