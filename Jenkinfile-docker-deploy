@@ -76,18 +76,19 @@ stages {
     stage('push to dockerhuB')
            {
            steps{
-           withCredentials([string(credentialsId: 'docker-hubcreDs', variable: 'docker-hubcreDs')]) {
+           withCredentials([string(credentialsId: 'docker-hubcreDs', variable: 'docker-hubcreDs')]) 
+           {
            sh "docker login -u shivaraj536211 -p ${docker-hubcreDs}"
            sh "docker push gameoflife:$BUIL_NUMBER"
-             }
-         }
+           }
+           }
          }
   stage('Update Image Version') {
       steps {
         sh label: '', script: '''sed -i s/latest/$BUILD_NUMBER/ deploy-kube.yml'''
 
       }
- }
+      }
   stage('Apply Kubernetes files   ') {
             steps {
              sh label: '', script: '''scp *.yml jenkins@13.234.20.156:/home/jenkins
