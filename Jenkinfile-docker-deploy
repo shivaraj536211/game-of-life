@@ -70,7 +70,7 @@ stages {
     }
     stage('Build ') {
       steps {
-       sh "docker build -t . shivaraj536211 $BUILD_NUMBER"
+       sh "docker build . -t shivaraj536211:$BUILD_NUMBER"
       }
    }
    stage('push to dockerhub')
