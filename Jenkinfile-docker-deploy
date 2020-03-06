@@ -76,8 +76,8 @@ stages {
    stage('push to dockerhub')
            {
            steps{
-           withCredentials([string(credentialsId: 'dowithCredentials([string(credentialsId: 'nani', variable: 'nani')]) { 
-            sh "docker login -u shivaraj536211 -p ${nani}"
+           withCredentials([string(credentialsId: 'job1', variable: 'job1')]) {           
+            sh "docker login -u shivaraj536211 -p ${job1}"
             sh "docker push shivaraj536211:${BUILD_NUMBER}"
             }
             }
