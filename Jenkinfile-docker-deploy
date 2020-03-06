@@ -76,14 +76,13 @@ stages {
    stage('push to dockerhub')
            {
            steps{
-           withCredentials([string(credentialsId: 'dowithCredentials([string(credentialsId: 'nani', variable: 'nani')]) { 
-            
-           sh "docker login -u shivaraj536211 -p ${nani}"
-           sh "docker push gameoflife:${BUILD_NUMBER}"
+           withCredentials([string(credentialsId: 'dowithCredentials([string(credentialsId: 'nani', variable: 'nani')]) 
+           { 
+            sh "docker login -u shivaraj536211 -p ${nani}"
+            sh "docker push gameoflife:${BUILD_NUMBER}"
             }
             }
            }
-
     stage('Update Image Version') {
       steps {
         sh label: '', script: '''sed -i s/latest/$BUILD_NUMBER/ deploy-kube.yml'''
