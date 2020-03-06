@@ -79,7 +79,7 @@ stages {
            withCredentials([string(credentialsId: 'docker-hubcreDs', variable: 'docker-hubcreDs')]) 
             {
            sh "docker login -u shivaraj536211 -p ${docker-hubcreDs}"
-           sh "docker push gameoflife:${BUIL_NUMBER}"
+           sh "docker push gameoflife:${BUILD_NUMBER}"
             }
             }
            }
