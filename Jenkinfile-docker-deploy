@@ -70,7 +70,7 @@ stages {
     }
     stage('Build') {
       steps {
-           sh "docker build -t gameoflife . $BUILD_NUMBER"
+           sh "docker build -t shivaraj536211 . $BUILD_NUMBER"
            }
            }
     stage('push to dockerhuB')
@@ -80,8 +80,8 @@ stages {
            sh "docker login -u shivaraj536211 -p ${docker-hubcreDs}"
            sh "docker push gameoflife:$BUIL_NUMBER"
              }
- }
- }
+         }
+         }
   stage('Update Image Version') {
       steps {
         sh label: '', script: '''sed -i s/latest/$BUILD_NUMBER/ deploy-kube.yml'''
