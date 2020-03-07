@@ -82,20 +82,19 @@ stages {
             }
             }
            }
-    stage('Update Image Version') {
-      steps {
-        sh label: '', script: '''sed -i s/latest/$BUILD_NUMBER/ deploy-kube.yml'''
-
-      }
- }
-  stage('Apply Kubernetes files   ') {
-            steps {
-             sh label: '', script: '''scp *.yml jenkins@13.234.20.156:/home/jenkins
-                                  ssh jenkins@13.234.20.156 kubectl apply -f deploy-kube.yml
-                                  ssh jenkins@13.234.20.156 kubectl apply -f service.yml'''
+   // stage('Update Image Version') {
+     // steps {
+       // sh label: '', script: '''sed -i s/latest/$BUILD_NUMBER/ deploy-kube.yml'''
+       //}
+ //}
+  //stage('Apply Kubernetes files   ') {
+    //        steps {
+      //       sh label: '', script: '''scp *.yml jenkins@13.234.20.156:/home/jenkins
+        //                          ssh jenkins@13.234.20.156 kubectl apply -f deploy-kube.yml
+          //                        ssh jenkins@13.234.20.156 kubectl apply -f service.yml'''
            
-        }
-     }
+       // }
+    // }
 }
 post {
         success {
