@@ -64,7 +64,7 @@ stages {
   stage('Deploy War') {
       steps {
         //   sh label: '', script: 'ansible-playbook deploy.yml'
-             deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: '', url: 'http://3.6.252.169:8080')], contextPath: 'jujubi', war: '**/*.war'
+             deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: '', url: 'http://3.6.252.169:8080')], contextPath: 'JUJUBI_MAR11', war: '**/*.war'
             // deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: 'JUJUBI', url: 'http://3.6.252.169:8080/')], contextPath: 'war', war: '**/*.war'
            }
     }
