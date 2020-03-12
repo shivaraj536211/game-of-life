@@ -25,19 +25,6 @@ stages {
      // **       in the global configuration.   
      }
    }
-
-   stage('Build') {
-       steps {
-       // Run the maven build
-
-      //if (isUnix()) {
-         sh 'mvn -Dmaven.test.failure.ignore=true install'
-      //} 
-      //else {
-      //   bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
-       }
-//}
-   }
  
   stage('Unit Test Results') {
       steps {
@@ -56,6 +43,19 @@ stages {
       
         }
     }
+    stage('Build') {
+       steps {
+       // Run the maven build
+
+      //if (isUnix()) {
+         sh 'mvn -Dmaven.test.failure.ignore=true install'
+      //} 
+      //else {
+      //   bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+       }
+//}
+   }
+    
      stage('Artifact upload') {
       steps {
      nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/JOB-1/gameoflife-web/target/gameoflife.war']], mavenCoordinate: [artifactId: 'gameoflife1', groupId: 'com.wakaleo.gameoflife', packaging: 'war', version: '$BUILD_NUMBER']]]
