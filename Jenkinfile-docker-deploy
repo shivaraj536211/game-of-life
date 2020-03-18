@@ -27,17 +27,6 @@ stages {
    }
  
   
- stage('sonarqube') {
-    environment {
-        scannerHome = tool 'sonarqube'
-    }
-    steps {
-        withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-      
-        }
-    }
     stage('Build') {
        steps {
        // Run the maven build
@@ -51,18 +40,17 @@ stages {
 //}
    }
    
-   stage('Build') {
-       steps {
-       // Run the maven build
-
-      //if (isUnix()) {
-         sh 'mvn -Dmaven.test.failure.ignore=true install'
-      //} 
-      //else {
-      //   bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
-       }
-//}
-   }
+   stage('sonarqube') {
+    environment {
+        scannerHome = tool 'sonarqube'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+      
+        }
+    }
     
      stage('Artifact upload') {
       steps {
