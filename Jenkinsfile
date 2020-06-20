@@ -60,7 +60,8 @@ stages {
      stage('Deployement war/ear file') {
       steps{
        deploy adapters: [tomcat8(credentialsId: '8844bccb-2fa4-4a07-8078-cf8256126665', path: '', url: 'http://3.18.226.65:8080/manager/html')], contextPath: '/var/lib/jenkins/workspace/CICD1/gameoflife-web/target', war: '**/*.war'       
-      } 
+      }
+     }    
   }
          
  post {
