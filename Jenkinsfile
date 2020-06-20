@@ -57,7 +57,12 @@ stages {
      nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/JOB-1/gameoflife-web/target/gameoflife.war']], mavenCoordinate: [artifactId: 'gameoflife1', groupId: 'com.wakaleo.gameoflife', packaging: 'war', version: '$BUILD_NUMBER']]]
       }
    }
- }
+     stage('Deployement war/ear file') {
+      steps{
+       deploy adapters: [tomcat8(credentialsId: '8844bccb-2fa4-4a07-8078-cf8256126665', path: '', url: 'http://3.18.226.65:8080/manager/html')], contextPath: '/var/lib/jenkins/workspace/CICD1/gameoflife-web/target', war: '**/*.war'       
+      } 
+  }
+         
  post {
         success {
             archiveArtifacts 'gameoflife-web/target/*.war'
