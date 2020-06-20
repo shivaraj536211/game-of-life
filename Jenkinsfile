@@ -57,3 +57,13 @@ stages {
      nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/JOB-1/gameoflife-web/target/gameoflife.war']], mavenCoordinate: [artifactId: 'gameoflife1', groupId: 'com.wakaleo.gameoflife', packaging: 'war', version: '$BUILD_NUMBER']]]
       }
    }
+ }
+ post {
+        success {
+            archiveArtifacts 'gameoflife-web/target/*.war'
+        }
+        failure {
+            mail to:"shivarajkumar585@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Build failed"
+        }
+    }       
+ }
