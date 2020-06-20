@@ -500,7 +500,7 @@
     <repository>
     <id>releases</id>
     <name>releases</name>
-    <url>http://3.134.38.52:8081/nexus/content/repositories/releases</url>
+    <url>http://3.133.206.93:8081/nexus/content/repositories/releases</url>
     </repository>
 
     <snapshotRepository>
