@@ -60,8 +60,8 @@ stages {
   stage('Deploy War') {
       steps {
         //   sh label: '', script: 'ansible-playbook deploy.yml'
-             deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: '', url: 'http://3.6.252.169:8080')], contextPath: 'JUJUBI_MAR20', war: '**/*.war'
-            // deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: 'JUJUBI', url: 'http://3.6.252.169:8080/')], contextPath: 'war', war: '**/*.war'
+             deploy adapters: [tomcat8(credentialsId: '8844bccb-2fa4-4a07-8078-cf8256126665', path: '', url: '3.18.226.65:8080/manager/html')], contextPath: '/var/lib/jenkins/workspace/JOB-1/gameoflife-web/target', war: '**/*.war'
+             // deploy adapters: [tomcat8(credentialsId: 'ac388e7f-271a-403c-8f5d-d1d7e45d83be', path: 'JUJUBI', url: 'http://3.6.252.169:8080/')], contextPath: 'war', war: '**/*.war'
            }
     }
     stage('Build Docker Image ') {
