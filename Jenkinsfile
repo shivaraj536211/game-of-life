@@ -66,7 +66,7 @@ stages {
     
      stage('Build Docker Image ') {
       steps {
-       sh "docker build . -t shivaraj536211/myimage:$BUILD_NUMBER"
+       sh "docker build . -t shivaraj536211/dockerimage:$BUILD_NUMBER"
       }
      }
      stage('push to dockerhub')
@@ -74,7 +74,7 @@ stages {
            steps{
            withCredentials([string(credentialsId: 'job3', variable: 'job3')]) {
            sh "docker login -u shivaraj536211 -p ${job3} " 
-            sh "docker push shivaraj536211/myimage:${BUILD_NUMBER}"
+            sh "docker push shivaraj536211/dockerimage:${BUILD_NUMBER}"
             }
             }
            }
